@@ -26,6 +26,16 @@ function formatSignString(params: any) {
   return str.join('&');
 }
 
+/**
+ * 发出请求
+ *
+ * @param logger {Logger} 日志类实例
+ * @param config {object} 服务商基本参数
+ * @param config.region {string} 区域
+ * @param config.secretId {string} secretId
+ * @param config.secretKey {string} secretKey
+ * @param params {object} 请求参数
+ */
 const action = function (logger: Logger, config: any, params: any) {
   logger.debug('%o', params);
 
@@ -60,7 +70,7 @@ const action = function (logger: Logger, config: any, params: any) {
 /**
  * 发布 API 接口
  * @param provider {object} 服务商配置
- * @param trigger {object} 云函数配置
+ * @param trigger {object} 网关接口配置
  */
 const deploy = async function (provider: any, trigger: any) {
   const logger = new Logger('@faasjs/tencentcloud-apigateway:deploy:' + trigger.name);

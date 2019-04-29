@@ -1,16 +1,16 @@
 {
   "name": "@faasjs/provider-tencentcloud-apigateway",
-  "version": "0.0.0-alpha.0",
+  "version": "0.0.0-alpha.1",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "lint": "tslint -p tsconfig.json --fix",
-    "build": "tsc",
+    "build": "rm -rf ./lib && tsc",
     "test": "jest --expand",
     "doc": "jsdoc2md --files ./lib/*.js > ./API.md",
     "ci": "yarn lint && yarn test",
-    "commit": "yarn ci && rm -rf ./lib && yarn build && yarn doc"
+    "commit": "yarn ci && yarn build && yarn doc"
   },
   "files": [
     "lib"
