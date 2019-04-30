@@ -139,5 +139,6 @@ const deploy = async function (provider: any, trigger: any) {
 };
 
 export {
+  action,
   deploy,
 };
