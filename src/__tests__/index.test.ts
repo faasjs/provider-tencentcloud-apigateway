@@ -1,37 +1,46 @@
 import { deploy } from '../index';
 
-test.each(['region', 'secretId', 'secretKey'])('%s required', async function (key) {
+jest.mock(process.cwd() + '/node_modules/@faasjs/request', () => {
+  return async function () {
+    return {
+      body: '{"apiIdStatusSet":[{"apiId":"apiId","path":"/"}]}'
+    };
+  };
+});
+
+test.each(['region', 'secretId', 'secretKey'])('%s', async function (key) {
   try {
-    await deploy({
-      config: {
-        [key]: key,
+    await deploy('testing', {
+      resource: {
+        provider: {
+          config: {
+            [key]: key
+          },
+          type: 'tencentcloud',
+        }
       },
-      type: 'tencentcloud',
-    }, {});
+    });
   } catch (error) {
     expect(error.message).toEqual('appId required');
   }
 });
 
 test('should work', async function () {
-  try {
-    await deploy({
+  const res = await deploy('testing', {
+    name: 'name',
+    resource: {
       config: {
-        appId: 'appId',
-        region: 'ap-beijing',
-        secretId: 'secretId',
-        secretKey: 'secretKey',
       },
-      type: 'tencentcloud',
-    }, {
-        deploy: {
-          name: 'name',
+      provider: {
+        config: {
+          appId: 'appId',
+          region: 'ap-beijing',
+          secretId: 'secretId',
+          secretKey: 'secretKey',
         },
-        resource: {
-          config: {},
-        },
-      });
-  } catch (error) {
-    expect(error.message).toContain('4104');
-  }
+        type: 'tencentcloud'
+      }
+    }
+  });
+  expect(res).toBeTruthy();
 });

@@ -1,11 +1,11 @@
 {
   "name": "@faasjs/provider-tencentcloud-apigateway",
-  "version": "0.0.0-alpha.2",
+  "version": "0.0.0-alpha.3",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "lint": "tslint -p tsconfig.json --fix",
+    "lint": "eslint --ext .ts --fix src",
     "build": "rm -rf ./lib && tsc",
     "test": "jest --expand",
     "doc": "jsdoc2md --files ./lib/*.js > ./API.md",
@@ -16,21 +16,38 @@
     "lib"
   ],
   "dependencies": {
-    "@faasjs/utils": "0.0.0-alpha.2"
+    "@faasjs/utils": "0.0.0-alpha.4"
   },
   "devDependencies": {
     "@babel/core": "*",
     "@babel/preset-env": "*",
     "@babel/preset-typescript": "*",
+    "@faasjs/eslint-config-recommended": "0.0.0-alpha.1",
     "@types/debug": "*",
     "@types/jest": "*",
     "@types/node": "*",
     "babel-jest": "*",
     "jest": "*",
     "jsdoc-babel": "*",
-    "jsdoc-to-markdown": "*",
-    "tslint": "*",
-    "typescript": "*"
+    "jsdoc-to-markdown": "*"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "8"
+          }
+        }
+      ],
+      "@babel/preset-typescript"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "@faasjs/recommended"
+    ]
   },
   "jest": {
     "collectCoverage": true,

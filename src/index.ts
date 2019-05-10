@@ -1,26 +1,27 @@
-import { Logger, request } from '@faasjs/utils';
+import request from '@faasjs/request';
+import Logger from '@faasjs/logger';
 import * as crypto from 'crypto';
 
-function mergeData(data: any, prefix: string = '') {
+function mergeData (data: any, prefix: string = '') {
   const ret: any = {};
   for (const k in data) {
-    if (data[k] === null) {
+    if (typeof data[k as string] === 'undefined' || data[k as string] === null) {
       continue;
     }
-    if (data[k] instanceof Array || data[k] instanceof Object) {
-      Object.assign(ret, mergeData(data[k], prefix + k + '.'));
+    if (data[k as string] instanceof Array || data[k as string] instanceof Object) {
+      Object.assign(ret, mergeData(data[k as string], prefix + k + '.'));
     } else {
-      ret[prefix + k] = data[k];
+      ret[prefix + k] = data[k as string];
     }
   }
   return ret;
 }
 
-function formatSignString(params: any) {
+function formatSignString (params: any) {
   const str: string[] = [];
 
   for (const key of Object.keys(params).sort()) {
-    str.push(key + '=' + params[key]);
+    str.push(key + '=' + params[key as string]);
   }
 
   return str.join('&');
@@ -72,10 +73,10 @@ const action = function (logger: Logger, config: any, params: any) {
  * @param provider {object} 服务商配置
  * @param trigger {object} 网关接口配置
  */
-const deploy = async function (provider: any, trigger: any) {
+const deploy = async function (staging: string, trigger: any) {
   const logger = new Logger('@faasjs/tencentcloud-apigateway:deploy:' + trigger.name);
 
-  logger.debug('开始发布\n\nprovider:\n%o\n\ntrigger:\n%o', provider, trigger);
+  logger.debug('开始发布\n\nstaging:\n%s\n\ntrigger:\n%o', staging, trigger);
 
   const config: {
     appId: string;
@@ -83,19 +84,19 @@ const deploy = async function (provider: any, trigger: any) {
     secretId: string;
     secretKey: string;
   } = {
-    appId: provider.config.appId,
-    region: provider.config.region,
-    secretId: provider.config.secretId,
-    secretKey: provider.config.secretKey,
+    appId: trigger.resource.provider.config.appId,
+    region: trigger.resource.provider.config.region,
+    secretId: trigger.resource.provider.config.secretId,
+    secretKey: trigger.resource.provider.config.secretKey,
   };
 
   for (const key of ['appId', 'region', 'secretId', 'secretKey']) {
-    if (!config[key]) {
+    if (!config[key as string]) {
       throw Error(`${key} required`);
     }
   }
 
-  trigger.resource.config['requestConfig.path'] = trigger.path || '/' + trigger.deploy.name;
+  trigger.resource.config['requestConfig.path'] = trigger.path || '/' + trigger.name;
   trigger.resource.config.apiName = trigger.functionName;
   trigger.resource.config.serviceScfFunctionName = trigger.functionName;
 
