@@ -99,6 +99,7 @@ const deploy = async function (staging: string, trigger: any) {
   trigger.resource.config['requestConfig.path'] = trigger.path || '/' + trigger.name;
   trigger.resource.config.apiName = trigger.functionName;
   trigger.resource.config.serviceScfFunctionName = trigger.functionName;
+  trigger.resource.config.serviceScfFunctionNamespace = staging;
 
   logger.debug('查询网关接口是否存在');
 
