@@ -4,6 +4,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "module": "lib/index.es.js",
   "scripts": {
     "lint": "eslint --ext .ts --fix src",
     "build": "rm -rf ./lib && rollup -c",
