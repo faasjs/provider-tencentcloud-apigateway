@@ -1,14 +1,14 @@
 {
   "name": "@faasjs/provider-tencentcloud-apigateway",
-  "version": "0.0.0-alpha.4",
+  "version": "0.0.0-alpha.5",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "lint": "eslint --ext .ts --fix src",
-    "build": "rm -rf ./lib && tsc",
+    "build": "rm -rf ./lib && rollup -c",
     "test": "jest --expand",
-    "doc": "jsdoc2md --files ./lib/*.js > ./API.md",
+    "doc": "jsdoc2md --files ./lib/index.js > ./API.md",
     "ci": "yarn lint && yarn test",
     "commit": "yarn ci && yarn build && yarn doc"
   },
@@ -16,7 +16,8 @@
     "lib"
   ],
   "dependencies": {
-    "@faasjs/utils": "0.0.0-alpha.4"
+    "@faasjs/request": "0.0.0-alpha.0",
+    "@faasjs/logger": "0.0.0-alpha.0"
   },
   "devDependencies": {
     "@babel/core": "*",
@@ -29,7 +30,10 @@
     "babel-jest": "*",
     "jest": "*",
     "jsdoc-babel": "*",
-    "jsdoc-to-markdown": "*"
+    "jsdoc-to-markdown": "*",
+    "rollup": "*",
+    "rollup-plugin-typescript2": "*",
+    "typescript": "*"
   },
   "babel": {
     "presets": [

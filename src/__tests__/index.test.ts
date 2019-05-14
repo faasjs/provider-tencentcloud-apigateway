@@ -40,7 +40,56 @@ test('should work', async function () {
         },
         type: 'tencentcloud'
       }
-    }
+    },
+    origin: {}
   });
-  expect(res).toBeTruthy();
+  expect(res).toHaveProperty('name');
+});
+
+describe('path', function () {
+  test('default', async function () {
+    const res = await deploy('testing', {
+      name: 'parent_name',
+      resource: {
+        config: {
+        },
+        provider: {
+          config: {
+            appId: 'appId',
+            region: 'ap-beijing',
+            secretId: 'secretId',
+            secretKey: 'secretKey',
+          },
+          type: 'tencentcloud'
+        },
+      },
+      origin: {}
+    });
+
+    expect(res.resource.config['requestConfig.path']).toEqual('/parent/name');
+  });
+
+  test('configed', async function () {
+    const res = await deploy('testing', {
+      name: 'parent_name',
+      resource: {
+        config: {
+        },
+        provider: {
+          config: {
+            appId: 'appId',
+            region: 'ap-beijing',
+            secretId: 'secretId',
+            secretKey: 'secretKey',
+          },
+          type: 'tencentcloud'
+        },
+      },
+      origin: {
+        path: 'path'
+      }
+    });
+
+    expect(res.resource.config['requestConfig.path']).toEqual('path');
+  });
 });

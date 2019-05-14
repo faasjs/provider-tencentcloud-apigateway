@@ -4,3 +4,4 @@ lib
 package
 *.tgz
 coverage
+.rpt2_cache

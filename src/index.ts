@@ -70,7 +70,7 @@ const action = function (logger: Logger, config: any, params: any) {
 
 /**
  * 发布 API 接口
- * @param provider {object} 服务商配置
+ * @param staging {string} 发布环境名
  * @param trigger {object} 网关接口配置
  */
 const deploy = async function (staging: string, trigger: any) {
@@ -96,9 +96,18 @@ const deploy = async function (staging: string, trigger: any) {
     }
   }
 
-  trigger.resource.config['requestConfig.path'] = trigger.path || '/' + trigger.name;
-  trigger.resource.config.apiName = trigger.functionName;
-  trigger.resource.config.serviceScfFunctionName = trigger.functionName;
+  if (!trigger.resource.config['requestConfig.path']) {
+    trigger.resource.config['requestConfig.path'] = trigger.origin.path || '/' + trigger.name.replace(/_/g, '/');
+  }
+
+  if (!trigger.resource.config.apiName) {
+    trigger.resource.config.apiName = trigger.functionName;
+  }
+
+  if (!trigger.resource.config.serviceScfFunctionName) {
+    trigger.resource.config.serviceScfFunctionName = trigger.functionName;
+  }
+
   trigger.resource.config.serviceScfFunctionNamespace = staging;
 
   logger.debug('查询网关接口是否存在');
@@ -137,7 +146,7 @@ const deploy = async function (staging: string, trigger: any) {
     serviceId: trigger.resource.config.serviceId,
   });
 
-  return true;
+  return trigger;
 };
 
 export {
