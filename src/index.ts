@@ -101,14 +101,15 @@ const deploy = async function (staging: string, trigger: any) {
   }
 
   if (!trigger.resource.config.apiName) {
-    trigger.resource.config.apiName = trigger.functionName;
+    trigger.resource.config.apiName = trigger.func.name;
   }
 
   if (!trigger.resource.config.serviceScfFunctionName) {
-    trigger.resource.config.serviceScfFunctionName = trigger.functionName;
+    trigger.resource.config.serviceScfFunctionName = trigger.func.name;
   }
 
   trigger.resource.config.serviceScfFunctionNamespace = staging;
+  trigger.resource.config.serviceScfFunctionQualifier = trigger.func.version;
 
   logger.debug('查询网关接口是否存在');
 
@@ -142,7 +143,7 @@ const deploy = async function (staging: string, trigger: any) {
   await action(logger, config, {
     Action: 'ReleaseService',
     environmentName: 'release',
-    releaseDesc: trigger.functionName,
+    releaseDesc: `Published ${trigger.func.name} by ${process.env.LOGNAME}`,
     serviceId: trigger.resource.config.serviceId,
   });
 

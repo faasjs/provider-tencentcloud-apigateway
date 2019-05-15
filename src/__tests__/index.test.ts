@@ -41,7 +41,8 @@ test('should work', async function () {
         type: 'tencentcloud'
       }
     },
-    origin: {}
+    origin: {},
+    func: {}
   });
   expect(res).toHaveProperty('name');
 });
@@ -63,7 +64,8 @@ describe('path', function () {
           type: 'tencentcloud'
         },
       },
-      origin: {}
+      origin: {},
+      func: {}
     });
 
     expect(res.resource.config['requestConfig.path']).toEqual('/parent/name');
@@ -87,7 +89,8 @@ describe('path', function () {
       },
       origin: {
         path: 'path'
-      }
+      },
+      func: {}
     });
 
     expect(res.resource.config['requestConfig.path']).toEqual('path');
