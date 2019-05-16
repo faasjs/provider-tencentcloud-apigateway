@@ -105,7 +105,7 @@ const deploy = async function (staging: string, trigger: any) {
   }
 
   if (!trigger.resource.config.serviceScfFunctionName) {
-    trigger.resource.config.serviceScfFunctionName = trigger.func.name;
+    trigger.resource.config.serviceScfFunctionName = trigger.func.functionName;
   }
 
   trigger.resource.config.serviceScfFunctionNamespace = staging;
