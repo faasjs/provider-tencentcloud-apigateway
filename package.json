@@ -1,6 +1,6 @@
 {
   "name": "@faasjs/provider-tencentcloud-apigateway",
-  "version": "0.0.0-alpha.6",
+  "version": "0.0.0-alpha.7",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -17,14 +17,14 @@
     "lib"
   ],
   "dependencies": {
-    "@faasjs/request": "0.0.0-alpha.0",
-    "@faasjs/logger": "0.0.0-alpha.0"
+    "@faasjs/request": "beta",
+    "@faasjs/logger": "beta"
   },
   "devDependencies": {
     "@babel/core": "*",
     "@babel/preset-env": "*",
     "@babel/preset-typescript": "*",
-    "@faasjs/eslint-config-recommended": "0.0.0-alpha.1",
+    "@faasjs/eslint-config-recommended": "beta",
     "@types/debug": "*",
     "@types/jest": "*",
     "@types/node": "*",

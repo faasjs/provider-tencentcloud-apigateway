@@ -649,7 +649,7 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@faasjs/eslint-config-recommended@0.0.0-alpha.1":
+"@faasjs/eslint-config-recommended@beta":
   version "0.0.0-alpha.1"
   resolved "https://registry.npm.taobao.org/@faasjs/eslint-config-recommended/download/@faasjs/eslint-config-recommended-0.0.0-alpha.1.tgz#3888e4e50e1eac30e9ee500e37f52bfceb5916c0"
   integrity sha1-OIjk5Q4erDDp7lAON/Ur/OtZFsA=
@@ -665,7 +665,12 @@
   resolved "https://registry.npm.taobao.org/@faasjs/logger/download/@faasjs/logger-0.0.0-alpha.0.tgz#014468d1031cce285a05dd8d668a5e44ac732589"
   integrity sha1-AURo0QMczihaBd2NZopeRKxzJYk=
 
-"@faasjs/request@0.0.0-alpha.0":
+"@faasjs/logger@beta":
+  version "0.0.0-alpha.2"
+  resolved "https://registry.npm.taobao.org/@faasjs/logger/download/@faasjs/logger-0.0.0-alpha.2.tgz#f318ce9acf5f988bfc7f4fd5e5687dad537cbf44"
+  integrity sha1-8xjOms9fmIv8f0/V5Wh9rVN8v0Q=
+
+"@faasjs/request@beta":
   version "0.0.0-alpha.0"
   resolved "https://registry.npm.taobao.org/@faasjs/request/download/@faasjs/request-0.0.0-alpha.0.tgz#fb910ad73caf9371ed9ba0f809595ed0296c9f27"
   integrity sha1-+5EK1zyvk3Htm6D4CVle0Clsnyc=
