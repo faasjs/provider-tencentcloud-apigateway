@@ -41,7 +41,6 @@ test('should work', async function () {
         type: 'tencentcloud'
       }
     },
-    origin: {},
     func: {}
   });
   expect(res).toHaveProperty('name');
@@ -64,7 +63,6 @@ describe('path', function () {
           type: 'tencentcloud'
         },
       },
-      origin: {},
       func: {}
     });
 
@@ -86,8 +84,6 @@ describe('path', function () {
           },
           type: 'tencentcloud'
         },
-      },
-      origin: {
         path: 'path'
       },
       func: {}
