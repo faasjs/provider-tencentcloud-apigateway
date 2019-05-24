@@ -1,6 +1,6 @@
 {
   "name": "@faasjs/provider-tencentcloud-apigateway",
-  "version": "0.0.0-alpha.8",
+  "version": "0.0.0-alpha.9",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -17,8 +17,8 @@
     "lib"
   ],
   "dependencies": {
-    "@faasjs/request": "beta",
-    "@faasjs/logger": "beta"
+    "@faasjs/logger": "beta",
+    "@faasjs/request": "beta"
   },
   "devDependencies": {
     "@babel/core": "*",

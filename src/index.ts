@@ -97,7 +97,7 @@ const deploy = async function (staging: string, trigger: any) {
   }
 
   if (!trigger.resource.config['requestConfig.path']) {
-    trigger.resource.config['requestConfig.path'] = trigger.origin.path || '/' + trigger.name.replace(/_/g, '/');
+    trigger.resource.config['requestConfig.path'] = trigger.path || '/' + trigger.name.replace(/_/g, '/');
   }
 
   if (!trigger.resource.config.apiName) {
